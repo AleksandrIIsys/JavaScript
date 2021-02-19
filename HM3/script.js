@@ -58,7 +58,7 @@ function updateClock() {
         if (t.total <= 0){
             ul.removeChild(elementsdate[i].parentNode)
         }
-            elementsclock[i].innerHTML = " - " + t.days + " дней " + + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
+            elementsclock[i].innerHTML = ". Осталось до выполнение задачи - " + t.days + " дней " + + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
     }
     
     var inter = setInterval(updateClock,1000)
