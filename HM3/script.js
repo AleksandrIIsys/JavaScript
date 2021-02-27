@@ -27,6 +27,9 @@ addBtn.addEventListener('click', function () {
     var spanElementDate = document.createElement('span');
     var spanElementClock = document.createElement('span');
     var icon = document.createElement('i');
+    if(inputdate.value == ''){
+        return 0
+    }
     var newTodo = input.value + ' ';
     input.value = '';
     var dateTodo = new Date(inputdate.value)
@@ -34,9 +37,8 @@ addBtn.addEventListener('click', function () {
     initializeClock(spanElementClock, dateTodo)
     icon.classList.add('fas', 'fa-trash-alt');
     spanElement.append(icon);
-    spanElementDate.innerHTML =  dateTodo.getFullYear() + '-' + ('0' + (dateTodo.getMonth()+1)).slice(-2) + '-' + ('0' + dateTodo.getDate()).slice(-2)
     spanElement.setAttribute('class', 'trash')
-    spanElementDate.setAttribute('class', 'Edate')
+    spanElementClock.setAttribute('data-time', dateTodo.getFullYear() + '-' + ('0' + (dateTodo.getMonth()+1)).slice(-2) + '-' + ('0' + dateTodo.getDate()).slice(-2))
     spanElementClock.setAttribute('class', 'clock')
     ul.appendChild(li).append(spanElement, newTodo, spanElementDate, spanElementClock)
     saveTodo()
@@ -51,14 +53,13 @@ function initializeClock(spanElementClock, dateTodo) {
 
 }
 function updateClock() {
-    var elementsdate = document.querySelectorAll('.Edate')
     var elementsclock = document.querySelectorAll('.clock')
     for (var i = 0; i < elementsclock.length; i++) {
-        var t = getTimeRemaining(elementsdate[i].innerHTML);
+        var t = getTimeRemaining(elementsclock[i].dataset.time);
         if (t.total <= 0){
-            ul.removeChild(elementsdate[i].parentNode)
+            ul.removeChild(elementsclock[i].parentNode)
         }
-            elementsclock[i].innerHTML = ". Осталось до выполнение задачи - " + t.days + " дней " + + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
+            elementsclock[i].innerHTML = " - " + t.days + " дней " + + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
     }
     
     var inter = setInterval(updateClock,1000)
@@ -67,9 +68,6 @@ function updateClock() {
 }
 function saveTodo() {
     localStorage.setItem("todoList", ul.innerHTML)
-}
-function setData() {
-    var date = new Date()
 }
 //Удаление todoList 
 clearBtn.addEventListener('click', function () {
