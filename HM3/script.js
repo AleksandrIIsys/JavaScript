@@ -6,30 +6,50 @@ var lists = document.querySelectorAll('li');
 var span = document.querySelectorAll('.trash');
 var clearBtn = document.querySelector('#clear');
 var addBtn = document.querySelector('#add');
+var obj = {}
 //ункция которая загружает todo-app, если список найден в локальном хринилище
 function loadTodo() {
+    ul.innerHTML = ''
     if (localStorage.getItem('todoList')) {
-        ul.innerHTML = localStorage.getItem('todoList');
+        obj = JSON.parse(localStorage.getItem('todoList'))
+    }
+    for(let i in obj){
+        var li = document.createElement('li');
+        var spanElement = document.createElement('span');
+        var spanElementClock = document.createElement('span');
+        var icon = document.createElement('i');  
+        li.setAttribute('id', i)
+        var dateTodo = new Date(obj[i].date)
+        initializeClock(spanElementClock, dateTodo)
+        icon.classList.add('fas', 'fa-trash-alt');
+        spanElement.append(icon);
+        spanElement.setAttribute('class', 'trash')
+        spanElementClock.setAttribute('class', 'clock')
+        ul.appendChild(li).append(spanElement, obj[i].value, spanElementClock)
     }
     span = document.querySelectorAll('.trash')
 }
+//удаление элемента
 function deletload() {
     for (var i = 0; i < span.length; i++) {
         span[i].addEventListener("click", function () {
+            delete obj[Number(this.parentNode.getAttribute('id'))]
             ul.removeChild(this.parentNode)
             saveTodo()
         })
     }
 }
+//добавление элемента
 addBtn.addEventListener('click', function () {
     var li = document.createElement('li');
     var spanElement = document.createElement('span');
-    var spanElementDate = document.createElement('span');
     var spanElementClock = document.createElement('span');
     var icon = document.createElement('i');
     if(inputdate.value == ''){
         return 0
-    }
+    }   
+     li.setAttribute('id', Object.keys(obj).length)
+    obj[Object.keys(obj).length] = {date:inputdate.value,value:input.value}
     var newTodo = input.value + ' ';
     input.value = '';
     var dateTodo = new Date(inputdate.value)
@@ -38,25 +58,26 @@ addBtn.addEventListener('click', function () {
     icon.classList.add('fas', 'fa-trash-alt');
     spanElement.append(icon);
     spanElement.setAttribute('class', 'trash')
-    spanElementClock.setAttribute('data-time', dateTodo.getFullYear() + '-' + ('0' + (dateTodo.getMonth()+1)).slice(-2) + '-' + ('0' + dateTodo.getDate()).slice(-2))
     spanElementClock.setAttribute('class', 'clock')
-    ul.appendChild(li).append(spanElement, newTodo, spanElementDate, spanElementClock)
+    ul.appendChild(li).append(spanElement, newTodo, spanElementClock)
     saveTodo()
-    loadTodo()
     deletload()
     updateClock()
 
 })
+//добавление элемента таймера
 function initializeClock(spanElementClock, dateTodo) {
     var t = getTimeRemaining(dateTodo);
     spanElementClock.innerHTML = " - " + t.days + " дней " + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
 
 }
+//реализация самого таймера
 function updateClock() {
     var elementsclock = document.querySelectorAll('.clock')
-    for (var i = 0; i < elementsclock.length; i++) {
-        var t = getTimeRemaining(elementsclock[i].dataset.time);
+    for (let i in obj) {
+        var t = getTimeRemaining(obj[i].date);
         if (t.total <= 0){
+            delete obj[Number(this.parentNode.getAttribute('id'))]
             ul.removeChild(elementsclock[i].parentNode)
         }
             elementsclock[i].innerHTML = " - " + t.days + " дней " + + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
@@ -66,12 +87,14 @@ function updateClock() {
     if(elementsclock.length == 0)
         clearInterval(inter)
 }
+//сохранение таблицы
 function saveTodo() {
-    localStorage.setItem("todoList", ul.innerHTML)
+    localStorage.setItem("todoList", JSON.stringify(obj))
 }
 //Удаление todoList 
 clearBtn.addEventListener('click', function () {
     ul.innerHTML = '';
+    obj = {}
     localStorage.clear();
 });
 function getTimeRemaining(endtime) {
