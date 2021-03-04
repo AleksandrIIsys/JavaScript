@@ -3,7 +3,7 @@ var inputdate = document.querySelector('.date')
 var ul = document.querySelector('ul');
 var container = document.querySelector('div');
 var lists = document.querySelectorAll('li');
-var span = document.querySelectorAll('.trash');
+var span = document.getElementsByClassName('trash');
 var clearBtn = document.querySelector('#clear');
 var addBtn = document.querySelector('#add');
 var obj = {}
@@ -27,7 +27,6 @@ function loadTodo() {
         spanElementClock.setAttribute('class', 'clock')
         ul.appendChild(li).append(spanElement, obj[i].value, spanElementClock)
     }
-    span = document.querySelectorAll('.trash')
 }
 //удаление элемента
 function deletload() {
@@ -77,8 +76,9 @@ function updateClock() {
     for (let i in obj) {
         var t = getTimeRemaining(obj[i].date);
         if (t.total <= 0){
-            delete obj[Number(this.parentNode.getAttribute('id'))]
-            ul.removeChild(elementsclock[i].parentNode)
+            alert('время вышло')
+            delete obj[i]
+            ul.removeChild(elementsclock[i].parentNode)  
         }
             elementsclock[i].innerHTML = " - " + t.days + " дней " + + ('0' + t.hours).slice(-2) + " часов " + ('0' + t.minutes).slice(-2) + " минут " + ('0' + t.seconds).slice(-2) + " секунд";
     }
@@ -115,3 +115,4 @@ function getTimeRemaining(endtime) {
 loadTodo();
 deletload();
 updateClock();
+
