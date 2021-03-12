@@ -1,0 +1,61 @@
+.block{
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row;
+}
+.block-father{
+    border: 2px solid;
+}
+.redelem{
+    display: none;
+}
+.block-element{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border: 1px solid;
+}
+#fern{
+    display: none;
+}
+#spruce{
+    display: none;
+}
+.block-element2{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+}
+.vvod{
+    display: flex;
+    width: 30px;
+    height: 20px;
+    align-self: center;
+    padding-left: 100px;
+}
+.pole{
+    padding: 3px;
+    width: 20px;
+    padding-right: 10px;
+    float: left;
+
+}
+.block-mather{
+    display: none;
+    padding: 10px;
+    flex-flow: column wrap;
+    justify-content: space-between;
+
+}
+.block-button{
+    display: flex;
+    flex-direction: row;
+}
+.btn{
+    display: flex;
+    padding: 10px;
+}
+.block2{
+    display: flex;
+    flex-flow: column;
+}

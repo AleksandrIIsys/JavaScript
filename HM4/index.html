@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+        <title>Document</title>
+</head> 
+<body>
+    <div class = 'block-father'>
+        <div class = 'block'>
+            <div class = 'block-element'> Имя </div>
+            <div class = 'block-element'> Возраст </div>
+            <div class = 'block-element'> Описание </div>
+            <div class = 'block-element'> Соцветие</div>
+            <div class = 'block-element'> Область применения </div>
+            <div class = 'block-element'>Опасность</div>
+            <div class = 'block-element'>Тип</div>
+            <div class = 'block-element'></div>
+
+        </div>
+    </div>
+    <div class = "btn"><input type="button" value="Создать" class = "creat"s></div>
+    <div class = 'block-mather'>
+        <div class = 'block2' hidden = 'true'>
+            <div class = 'block-element2'> <div class = 'pole'>Тип</div>
+                <div class = 'vvod'>
+                    <select id="sel">
+                        <option value="none" autofocus>Выберите растение</option>
+                        <option value="Папоротник">Папоротник</option>
+                        <option value="Ель обыкновенная">Ель обыкновенная</option>
+                    </select>
+                </div>
+            </div> 
+            <div class = 'block-element2'> <div class = 'pole'>Имя</div> <div class = 'vvod'><input type="text" id="inp"></div></div> 
+            <div class = 'block-element2'> <div class = 'pole'>Возраст</div> <div class = 'vvod'><input type="text" id="inp"></div></div> 
+            <div class = 'block-element2'> <div class = 'pole'>Описание</div> <div class = 'vvod'><input type="text" id="inp"></div></div> 
+            <div class = 'block-element2'> <div class = 'pole'>Соцветие</div> <div class = 'vvod'><input type="text" id="inp"></div></div> 
+            <div class = 'block-element2'> <div class = 'pole'>Опасность</div> <div class = 'vvod'><input type="text" id="inp"></div></div> 
+            <div class = 'block-element2'> <div class = 'pole'>Область применения</div> <div class = 'vvod'><input type="text" id="inp"></div></div>
+            <div class = 'block-element2' id = 'fern'><div class = 'pole'>Вид</div> <div class = 'vvod'><input type='text' id='inp'></div></div> 
+            <div class = 'block-element2' id = 'fern'><div class = 'pole'>Имя Открывателя</div> <div class = 'vvod'><input type='text' id='inp'></div></div>
+            <div class = 'block-element2' id = 'spruce'><div class = 'pole'>Место нахождение</div> <div class = 'vvod'><input type='text' id='inp'></div></div> 
+            <div class = 'block-element2' id = 'spruce'><div class = 'pole'>Высота</div> <div class = 'vvod'><input type='text' id='inp'></div></div>
+        </div>
+        <div class = 'block-button'>
+            <div class = "btn"><input type="button" value="Сохранить" class = 'redelem'></div>
+            <div class = "btn"><input type="button" value="Создать" class = 'createlem'></div>
+            <div class = "btn"><input type="button" value="Закрыть" class = 'close'></div>
+        </div>
+    </div>
+<script src= 'script.js' ></script>    
+</body>
+</html>
